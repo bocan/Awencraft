@@ -1,0 +1,7 @@
+---
+
+  download_url: http://download.oracle.com/otn-pub/java/jdk/8u74-b02/jdk-8u74-linux-x64.tar.gz
+  download_folder: /opt
+  java_name: "{{download_folder}}/jdk1.8.0_74"
+  java_archive: "{{download_folder}}/jdk-8u74-linux-x64.tar.gz"
+

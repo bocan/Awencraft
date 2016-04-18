@@ -1,0 +1,13 @@
+---
+
+- name: Update Everything
+  yum: name=* state=latest
+
+- name: Add vagrant hosts to local /etc/hosts
+  local_action: lineinfile
+                state=present
+                dest=/etc/hosts
+                regexp="^(?:[0-9]{1,3}\.){3}[0-9]{1,3} {{item}}\.vagrant$"
+                line="{{ hostvars[item].ansible_enp0s8.ipv4.address }} {{item}}.vagrant"
+  when: hostvars[item].ansible_enp0s8.ipv4.address is defined
+  with_items: '{{groups.all}}'

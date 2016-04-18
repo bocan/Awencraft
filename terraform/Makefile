@@ -8,3 +8,6 @@ plan: update-modules
 
 apply: update-modules
 	terraform apply -state="tfstate/awencraft.tfstate" -var-file="tfvars/awencraft.tfvars" -parallelism=$(PARALLELISM)
+
+destroy:
+	terraform destroy -state="tfstate/awencraft.tfstate" -var-file="tfvars/awencraft.tfvars" -parallelism=$(PARALLELISM)

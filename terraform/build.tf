@@ -17,9 +17,38 @@ provider "aws" {
   region = "${var.region}"
 
 }
+ 
+resource "aws_security_group" "minecraft" {
+  name = "minecraft"
+  description = "Minecraft Security Group"
+
+  ingress {
+    from_port = 25565
+    to_port = 25565
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    protocol = "tcp"
+    from_port = 22
+    to_port = 22
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+      from_port = 0
+      to_port = 0
+      protocol = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 
 resource "aws_instance" "awencraft" {
     ami = "ami-00e1f76a"
     instance_type = "t2.small"
+    security_groups = ["minecraft"]
+    key_name = "CBFKey"
 }
+
 
